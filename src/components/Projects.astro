@@ -57,6 +57,7 @@ const initialIndex = 0;
           <div class="flex flex-1 flex-col gap-4 p-6 md:p-8">
             <h3 class="font-mono text-lg leading-snug font-bold sm:text-xl">{project.title}</h3>
             <p class="text-sm leading-relaxed text-soft">{project.description}</p>
+            {project.note && <p class="text-xs leading-relaxed text-muted">{project.note}</p>}
             <ul class="flex flex-wrap gap-1.5" aria-label="Tecnologias">
               {project.stack.map((tech) => (
                 <li class="rounded-full border border-line px-2.5 py-0.5 font-mono text-[11px] text-muted">{tech}</li>

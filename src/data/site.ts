@@ -60,6 +60,8 @@ export type Project = {
   liveUrl?: string;
   /** Assunto da mensagem do botão "Quero um parecido", exibido quando não há demo. */
   topic?: string;
+  /** Observação curta, exibida abaixo da descrição. */
+  note?: string;
 };
 
 export const projects: Project[] = [
@@ -92,8 +94,9 @@ export const projects: Project[] = [
     stack: ['Next.js', 'TypeScript', 'GraphQL', 'Tailwind CSS'],
     image: dojoImage,
     imageAlt:
-      'Dashboard do DojoControl com alunos ativos, receita do mês, aniversariantes, inadimplência e avisos do dojo',
+      'Dashboard do DojoControl com alunos ativos, receita do mês, aniversariantes, inadimplência e avisos do dojo. Os números são ilustrativos.',
     topic: 'um sistema interno',
+    note: 'Os dados da tela são ilustrativos.',
   },
 ];
 

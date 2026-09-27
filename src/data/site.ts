@@ -1,7 +1,7 @@
 import type { ImageMetadata } from 'astro';
 import suplogImage from '../assets/projects/suplog.png';
 import cumbucaImage from '../assets/projects/cumbuca.png';
-import comingSoonImage from '../assets/projects/em-breve.png';
+import dojoImage from '../assets/projects/dojo.png';
 import { buildWhatsappMessage, buildWhatsappUrl } from '../lib/whatsapp';
 
 // Todo o conteúdo do site fica aqui: edite este arquivo para trocar textos, links e contatos.
@@ -85,15 +85,15 @@ export const projects: Project[] = [
     liveUrl: 'https://pmenezesdev.github.io/suplog/',
   },
   {
-    // TODO: substituir pelos dados do projeto que ainda será lançado.
-    title: 'Novo projeto',
-    category: 'Em breve',
+    title: 'DojoControl — Nindô-Kan',
+    category: 'Sistema interno',
     description:
-      'Um novo sistema está em desenvolvimento e será publicado aqui em breve. Quer algo parecido para o seu negócio? Vamos conversar.',
-    stack: ['TypeScript', 'Node.js', 'PostgreSQL'],
-    image: comingSoonImage,
-    imageAlt: 'Editor de código com o novo projeto em desenvolvimento',
-    topic: 'um sistema sob medida',
+      'Sistema para o dojo de karatê Nindô-Kan: alunos, turmas, mensalidades e graduações, com dashboard de receita, aniversariantes e inadimplência.',
+    stack: ['Next.js', 'TypeScript', 'GraphQL', 'Tailwind CSS'],
+    image: dojoImage,
+    imageAlt:
+      'Dashboard do DojoControl com alunos ativos, receita do mês, aniversariantes, inadimplência e avisos do dojo',
+    topic: 'um sistema interno',
   },
 ];
 

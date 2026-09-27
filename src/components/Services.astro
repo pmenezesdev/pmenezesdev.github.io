@@ -1,0 +1,78 @@
+---
+import Icon from './Icon.astro';
+import { differentials, process, services, whatsappUrl } from '../data/site';
+
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section id="servicos" class="py-20 sm:py-28" aria-labelledby="servicos-titulo">
+  <div class="container-page">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <p class="max-w-sm text-sm leading-relaxed text-soft sm:text-base">
+        Do <em>primeiro clique</em> ao <em>sistema que roda a sua empresa</em>: soluções sob medida para
+        vender mais e trabalhar melhor.
+      </p>
+      <h2 id="servicos-titulo" class="display reveal md:text-right">Serviços</h2>
+    </div>
+
+    <ul class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        services.map((service, index) => (
+          <li class="reveal card group relative flex flex-col p-6 transition-colors hover:border-paper hover:bg-paper hover:text-ink">
+            <span class="font-mono text-xs text-muted group-hover:text-ink/60">{pad(index + 1)}</span>
+            <h3 class="mt-6 font-mono text-base font-bold">{service.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-soft group-hover:text-ink/80">{service.description}</p>
+            <a
+              href={whatsappUrl(service.title)}
+              data-wa
+              data-wa-topic={service.title}
+              target="_blank"
+              rel="noopener"
+              class="mt-6 inline-flex items-center gap-2 font-mono text-xs font-semibold after:absolute after:inset-0"
+              aria-label={`Pedir orçamento de ${service.title}`}
+            >
+              Pedir orçamento <Icon name="arrow-right" size={14} class="transition-transform group-hover:translate-x-1" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-20 grid gap-10 border-t border-line pt-14 md:grid-cols-[0.8fr_2fr]">
+      <div>
+        <p class="eyebrow">.../Por que eu...</p>
+        <h3 class="mt-3 font-mono text-2xl font-bold">Qualidade, preço e suporte.</h3>
+      </div>
+      <ul class="grid gap-8 sm:grid-cols-3">
+        {
+          differentials.map((item) => (
+            <li class="reveal">
+              <h4 class="font-semibold">{item.title}</h4>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{item.description}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="mt-20 grid gap-10 border-t border-line pt-14 md:grid-cols-[0.8fr_2fr]">
+      <div>
+        <p class="eyebrow">.../Como funciona...</p>
+        <h3 class="mt-3 font-mono text-2xl font-bold">Do briefing ao ar em 4 passos.</h3>
+      </div>
+      <ol class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          process.map((step, index) => (
+            <li class="reveal card p-5">
+              <span class="flex size-8 items-center justify-center rounded-full border border-line font-mono text-xs">
+                {index + 1}
+              </span>
+              <h4 class="mt-4 font-semibold">{step.title}</h4>
+              <p class="mt-1.5 text-sm leading-relaxed text-muted">{step.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

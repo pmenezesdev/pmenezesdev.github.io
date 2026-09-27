@@ -1,0 +1,50 @@
+---
+import { site, whatsappUrl } from '../data/site';
+
+const links = [
+  { href: '#sobre', label: 'Sobre' },
+  { href: '#projetos', label: 'Projetos' },
+  { href: '#servicos', label: 'Serviços' },
+  { href: '#experiencia', label: 'Experiência' },
+  { href: '#contato', label: 'Contato' },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-transparent bg-ink/80 backdrop-blur-md" data-header>
+  <div class="container-page flex h-18 items-center justify-between gap-6">
+    <a href="#inicio" class="font-sans text-sm leading-tight font-semibold" aria-label={`${site.name}, início`}>
+      {site.firstName}<br />{site.name.split(' ').slice(1).join(' ')}
+    </a>
+
+    <nav aria-label="Principal" class="hidden md:block">
+      <ul class="flex items-center gap-8 text-xs text-soft">
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href} class="transition-colors hover:text-paper">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a
+      href={whatsappUrl()}
+      data-wa
+      target="_blank"
+      rel="noopener"
+      class="rounded-full border border-paper px-4 py-2 font-mono text-xs font-semibold transition-colors hover:bg-paper hover:text-ink"
+    >
+      Orçamento
+    </a>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = () => header?.classList.toggle('border-line', window.scrollY > 8);
+  window.addEventListener('scroll', toggle, { passive: true });
+  toggle();
+</script>

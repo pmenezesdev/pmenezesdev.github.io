@@ -1,0 +1,57 @@
+---
+import { sellers, site } from '../data/site';
+---
+
+<div
+  hidden
+  data-referral
+  data-phone={site.contact.whatsapp}
+  data-first-name={site.firstName}
+  data-sellers={JSON.stringify(sellers)}
+>
+</div>
+
+<script>
+  import { buildWhatsappMessage, buildWhatsappUrl } from '../lib/whatsapp';
+
+  const STORAGE_KEY = 'indicacao';
+  const MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
+
+  const config = document.querySelector<HTMLElement>('[data-referral]');
+  if (config) {
+    const phone = config.dataset.phone!;
+    const firstName = config.dataset.firstName!;
+    const sellers: { slug: string; name: string }[] = JSON.parse(config.dataset.sellers ?? '[]');
+    const findSeller = (slug?: string | null) =>
+      sellers.find((seller) => seller.slug === slug?.trim().toLowerCase());
+
+    let seller = findSeller(new URLSearchParams(location.search).get('ref'));
+
+    try {
+      if (seller) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ slug: seller.slug, at: Date.now() }));
+      } else {
+        const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
+        if (stored && Date.now() - stored.at < MAX_AGE_MS) seller = findSeller(stored.slug);
+      }
+    } catch {
+      // Sem acesso ao localStorage (modo privado): vale só a indicação da URL atual.
+    }
+
+    if (seller) {
+      document.querySelectorAll<HTMLAnchorElement>('a[data-wa]').forEach((link) => {
+        const message = buildWhatsappMessage({
+          firstName,
+          topic: link.dataset.waTopic,
+          sellerName: seller.name,
+        });
+        link.href = buildWhatsappUrl(phone, message);
+      });
+
+      document.querySelectorAll<HTMLElement>('[data-referral-badge]').forEach((badge) => {
+        badge.querySelector('[data-referral-name]')!.textContent = seller.name;
+        badge.hidden = false;
+      });
+    }
+  }
+</script>

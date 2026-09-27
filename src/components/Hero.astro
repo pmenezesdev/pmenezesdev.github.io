@@ -1,0 +1,79 @@
+---
+import Icon from './Icon.astro';
+import { site, whatsappUrl } from '../data/site';
+
+const socials = [
+  { label: 'GitHub', href: site.social.github, icon: 'github' },
+  { label: 'LinkedIn', href: site.social.linkedin, icon: 'linkedin' },
+  { label: 'Instagram', href: site.social.instagram, icon: 'instagram' },
+  { label: 'WhatsApp', href: whatsappUrl(), icon: 'whatsapp', wa: true },
+  { label: 'E-mail', href: site.contact.email && `mailto:${site.contact.email}`, icon: 'mail' },
+] as const;
+---
+
+<section id="inicio" class="relative overflow-hidden pt-12 pb-10 sm:pt-20">
+  <div class="ring-deco -top-48 -right-48 size-[560px]"></div>
+  <div class="ring-deco top-72 -right-20 size-[240px]"></div>
+
+  <div class="container-page relative">
+    <p
+      class="mb-8 inline-block rounded-full border border-whats/40 bg-whats/10 px-4 py-1.5 text-xs text-whats"
+      hidden
+      data-referral-badge
+    >
+      Você chegou pela indicação de <strong data-referral-name></strong>
+    </p>
+
+    <div class="relative">
+      <h1 class="display">
+        <span class="block">Desenvolvedor</span>
+        <span class="mt-2 block text-right sm:mt-4">Full-stack</span>
+      </h1>
+
+      <div class="display absolute top-0 right-0 hidden h-[0.95em] items-center lg:flex">
+        <a
+          href="#projetos"
+          class="group flex w-64 items-center justify-between rounded-full bg-paper py-1.5 pr-1.5 pl-6 font-mono text-sm font-semibold tracking-normal text-ink"
+        >
+          Ver projetos
+          <span class="flex size-9 items-center justify-center rounded-full border border-ink transition-transform group-hover:translate-x-1">
+            <Icon name="arrow-right" size={16} />
+          </span>
+        </a>
+      </div>
+
+      <p class="mt-8 max-w-sm text-sm leading-relaxed text-soft sm:text-base lg:absolute lg:bottom-1 lg:left-0 lg:mt-0">
+        Crio <em>landing pages</em>, <em>sites</em> e <em>sistemas web</em> rápidos, bonitos e feitos para
+        vender. Atendimento para todo o Brasil, direto de {site.city}–{site.state}.
+      </p>
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-3 lg:hidden">
+      <a href={whatsappUrl()} data-wa target="_blank" rel="noopener" class="btn-light">
+        <Icon name="whatsapp" /> Pedir orçamento
+      </a>
+      <a href="#projetos" class="pill">Ver projetos <Icon name="arrow-right" size={14} /></a>
+    </div>
+
+    <ul class="mt-12 flex flex-wrap justify-center gap-3 sm:mt-16" aria-label="Redes e contato">
+      {
+        socials
+          .filter((social) => social.href)
+          .map((social) => (
+            <li>
+              <a
+                href={social.href}
+                class="pill"
+                target="_blank"
+                rel="noopener me"
+                {...('wa' in social ? { 'data-wa': '' } : {})}
+              >
+                <Icon name={social.icon} size={14} />
+                {social.label}
+              </a>
+            </li>
+          ))
+      }
+    </ul>
+  </div>
+</section>

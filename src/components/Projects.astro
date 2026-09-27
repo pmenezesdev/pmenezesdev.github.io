@@ -1,0 +1,193 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import { projects, whatsappUrl } from '../data/site';
+
+const initialIndex = 0;
+---
+
+<section id="projetos" class="relative py-12" aria-labelledby="projetos-titulo">
+  <div class="container-page mb-6 flex items-end justify-between gap-4">
+    <div>
+      <p class="eyebrow">.../Projetos...</p>
+      <h2 id="projetos-titulo" class="mt-2 font-mono text-xl font-bold sm:text-2xl">Trabalhos recentes</h2>
+    </div>
+    <div class="hidden gap-2 sm:flex">
+      <button type="button" class="btn-circle" data-carousel-prev aria-label="Projeto anterior">
+        <Icon name="arrow-left" size={16} />
+      </button>
+      <button type="button" class="btn-circle" data-carousel-next aria-label="Próximo projeto">
+        <Icon name="arrow-right" size={16} />
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="flex snap-x snap-mandatory gap-4 overflow-x-auto px-[6%] pb-4 [scrollbar-width:none] sm:gap-6 md:px-[18%] [&::-webkit-scrollbar]:hidden"
+    data-carousel
+    data-initial={initialIndex}
+    role="region"
+    aria-roledescription="carrossel"
+    aria-label="Projetos"
+    tabindex="0"
+  >
+    {
+      projects.map((project, index) => (
+        <article
+          class="card group/card flex w-[88%] shrink-0 snap-center flex-col overflow-hidden transition-opacity duration-500 data-[active=false]:opacity-50 md:w-full md:flex-row"
+          data-carousel-item
+          aria-label={`${index + 1} de ${projects.length}: ${project.title}`}
+        >
+          <div class="relative aspect-[16/10] overflow-hidden bg-surface md:aspect-auto md:w-1/2">
+            <Image
+              src={project.image}
+              alt={project.imageAlt}
+              widths={[480, 800, 1200, 1600, 2000]}
+              sizes="(min-width: 768px) 32vw, 78vw"
+              quality={90}
+              loading={index === initialIndex ? 'eager' : 'lazy'}
+              fetchpriority={index === initialIndex ? 'high' : 'auto'}
+              class="size-full object-cover object-top transition-transform duration-700 group-hover/card:scale-105"
+            />
+            <span class="absolute top-3 left-3 rounded-full bg-ink/80 px-3 py-1 font-mono text-[11px] backdrop-blur">
+              {project.category}
+            </span>
+          </div>
+
+          <div class="flex flex-1 flex-col gap-4 p-6 md:p-8">
+            <h3 class="font-mono text-lg leading-snug font-bold sm:text-xl">{project.title}</h3>
+            <p class="text-sm leading-relaxed text-soft">{project.description}</p>
+            <ul class="flex flex-wrap gap-1.5" aria-label="Tecnologias">
+              {project.stack.map((tech) => (
+                <li class="rounded-full border border-line px-2.5 py-0.5 font-mono text-[11px] text-muted">{tech}</li>
+              ))}
+            </ul>
+
+            <div class="mt-auto flex items-center gap-3 pt-2">
+              {!project.liveUrl && !project.repoUrl ? (
+                <a
+                  href={whatsappUrl(project.topic)}
+                  data-wa
+                  data-wa-topic={project.topic}
+                  target="_blank"
+                  rel="noopener"
+                  class="btn-light !px-5 !py-2.5 !text-xs"
+                >
+                  Quero um parecido
+                </a>
+              ) : (
+                <>
+                  {project.liveUrl && (
+                    <a href={project.liveUrl} target="_blank" rel="noopener" class="btn-light !px-5 !py-2.5 !text-xs">
+                      Ver projeto
+                    </a>
+                  )}
+                  {project.repoUrl && (
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noopener"
+                      class="btn-circle !size-9"
+                      aria-label={`Código de ${project.title} no GitHub`}
+                    >
+                      <Icon name="github" size={16} />
+                    </a>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const track = document.querySelector<HTMLElement>('[data-carousel]');
+  if (track) {
+    const items = [...track.querySelectorAll<HTMLElement>('[data-carousel-item]')];
+    let active = Number(track.dataset.initial ?? 0);
+
+    const setActive = (index: number) => {
+      active = index;
+      items.forEach((item, i) => (item.dataset.active = String(i === index)));
+    };
+
+    const scrollToItem = (index: number, behavior: ScrollBehavior = 'smooth') => {
+      const item = items[(index + items.length) % items.length];
+      track.scrollTo({
+        left: item.offsetLeft - (track.clientWidth - item.clientWidth) / 2,
+        behavior,
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(items.indexOf(entry.target as HTMLElement));
+        }
+      },
+      { root: track, threshold: 0.6 },
+    );
+    items.forEach((item) => observer.observe(item));
+
+    setActive(active);
+    requestAnimationFrame(() => scrollToItem(active, 'instant'));
+
+    const AUTOPLAY_MS = 5000;
+    const section = track.closest('section')!;
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    let hovering = false;
+    let focused = false;
+    let inView = false;
+
+    const restartAutoplay = () => {
+      clearInterval(timer);
+      if (reducedMotion || hovering || focused || !inView || document.hidden) return;
+      timer = setInterval(() => scrollToItem(active + 1), AUTOPLAY_MS);
+    };
+
+    const go = (index: number) => {
+      scrollToItem(index);
+      restartAutoplay();
+    };
+
+    new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        restartAutoplay();
+      },
+      { threshold: 0.4 },
+    ).observe(track);
+
+    section.addEventListener('pointerenter', (event) => {
+      if (event.pointerType !== 'mouse') return;
+      hovering = true;
+      restartAutoplay();
+    });
+    section.addEventListener('pointerleave', () => {
+      hovering = false;
+      restartAutoplay();
+    });
+    section.addEventListener('focusin', (event) => {
+      focused = (event.target as Element).matches(':focus-visible');
+      restartAutoplay();
+    });
+    section.addEventListener('focusout', (event) => {
+      focused = section.contains(event.relatedTarget as Node | null);
+      restartAutoplay();
+    });
+    track.addEventListener('pointerdown', restartAutoplay);
+    document.addEventListener('visibilitychange', restartAutoplay);
+
+    document.querySelector('[data-carousel-prev]')?.addEventListener('click', () => go(active - 1));
+    document.querySelector('[data-carousel-next]')?.addEventListener('click', () => go(active + 1));
+    track.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      go(event.key === 'ArrowLeft' ? active - 1 : active + 1);
+    });
+  }
+</script>

@@ -1,0 +1,33 @@
+---
+import { experience, site, yearsOfExperience } from '../data/site';
+---
+
+<section id="experiencia" class="pt-10 pb-20 sm:pb-28" aria-labelledby="experiencia-titulo">
+  <div class="container-page">
+    <h2 id="experiencia-titulo" class="display reveal text-right">Experiência</h2>
+  </div>
+
+  <div class="mt-10 border-t border-line">
+    {
+      experience.map((job) => (
+        <div class="group border-b border-line transition-colors hover:bg-paper hover:text-ink">
+          <div class="container-page grid grid-cols-[1fr_1.4fr] items-center gap-4 py-5 sm:grid-cols-[1fr_1fr_2fr]">
+            <div>
+              <p class="font-mono text-sm">{job.period}</p>
+              <p class="text-[11px] text-muted group-hover:text-ink/60">{job.duration}</p>
+            </div>
+            <p class="text-sm font-semibold">{job.company}</p>
+            <p class="col-span-2 font-mono text-xs sm:col-span-1 sm:text-sm">
+              {job.role} <span class="text-muted group-hover:text-ink/50">|</span> {job.stack}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="container-page mt-6 text-right text-sm text-muted">
+    Programando desde {site.startYear}
+    <p class="text-paper italic">{yearsOfExperience}+ anos de experiência</p>
+  </div>
+</section>

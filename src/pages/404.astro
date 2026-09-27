@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+
+<Base title={`Página não encontrada | ${site.name}`} noindex>
+  <main id="conteudo" class="container-page flex min-h-svh flex-col items-start justify-center gap-6">
+    <p class="eyebrow">.../404...</p>
+    <h1 class="display">Página não<br />encontrada</h1>
+    <a href="/" class="btn-light">Voltar para o início</a>
+  </main>
+</Base>

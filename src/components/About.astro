@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import photo from '../assets/pedro.jpg';
+import { site, stack, yearsOfExperience } from '../data/site';
+
+const layout = ['w-full sm:w-[88%]', 'w-full sm:w-[62%]', 'w-full sm:w-[88%]', 'w-full sm:w-[62%] sm:ml-auto'];
+---
+
+<section id="sobre" class="relative overflow-hidden py-20 sm:py-28" aria-labelledby="sobre-titulo">
+  <div class="ring-deco top-40 -right-56 size-[520px]"></div>
+
+  <div class="container-page relative">
+    <div class="grid gap-6 md:grid-cols-2">
+      <h2 id="sobre-titulo" class="eyebrow"><span aria-hidden="true">.../</span>Sobre mim<span aria-hidden="true">...</span></h2>
+      <p class="reveal text-base leading-relaxed text-soft sm:text-lg">
+        Olá! Sou o {site.firstName}, <em>desenvolvedor full-stack</em> de {site.city}–{site.state}.
+        Há mais de <em>{yearsOfExperience} anos</em> transformando ideias em produtos digitais para
+        empresas de todo o Brasil.
+      </p>
+    </div>
+
+    <div class="mt-14 grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+      <div class="relative flex flex-col gap-4">
+        {
+          stack.map((group, index) => (
+            <div
+              class:list={[
+                'reveal rounded-2xl border p-5',
+                layout[index],
+                index === 0 ? 'border-paper bg-paper text-ink' : 'border-line bg-surface/60',
+              ]}
+            >
+              <h3 class="text-sm font-semibold">{group.title}</h3>
+              <p class:list={['mt-2 font-mono text-[11px] leading-relaxed', index === 0 ? 'text-ink/80' : 'text-muted']}>
+                {group.items.join(' / ')}
+              </p>
+            </div>
+          ))
+        }
+
+        <a
+          href={site.social.github}
+          target="_blank"
+          rel="noopener"
+          class="btn-circle absolute top-[27%] right-[4%] hidden !size-12 bg-paper !text-ink hover:!bg-transparent hover:!text-paper sm:inline-flex"
+          aria-label="Ver meu GitHub"
+        >
+          <Icon name="arrow-up-right" size={18} />
+        </a>
+
+        <p class="max-w-44 text-[11px] leading-snug text-muted sm:absolute sm:bottom-6 sm:left-0">
+          Algumas das minhas <em>tecnologias</em>, linguagens e <em>ferramentas</em> favoritas.
+        </p>
+      </div>
+
+      <div class="reveal mx-auto w-full max-w-xs sm:max-w-sm lg:mr-0 lg:ml-auto">
+        <Image
+          src={photo}
+          alt={`Foto de ${site.name}, ${site.title.toLowerCase()}`}
+          widths={[320, 460]}
+          sizes="(min-width: 1024px) 384px, 90vw"
+          quality={90}
+          class="aspect-[4/5] w-full rounded-3xl object-cover grayscale"
+        />
+      </div>
+    </div>
+  </div>
+</section>

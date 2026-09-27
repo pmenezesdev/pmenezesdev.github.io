@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/jetbrains-mono/wght.css';
+@import '@fontsource-variable/open-sans/wght.css';
+@import '@fontsource-variable/open-sans/wght-italic.css';
+
+@theme {
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, Consolas, monospace;
+  --font-sans: 'Open Sans Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0f0f0f;
+  --color-surface: #161616;
+  --color-line: #2e2e2e;
+  --color-muted: #9b9b9b;
+  --color-soft: #d4d4d4;
+  --color-paper: #f4f4f4;
+  --color-whats: #25d366;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-ink text-paper font-sans antialiased;
+  }
+
+  em {
+    @apply text-paper italic;
+  }
+
+  ::selection {
+    @apply bg-paper text-ink;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-4 outline-paper;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs text-muted;
+  }
+
+  .display {
+    @apply font-mono font-bold leading-[0.95] tracking-tight;
+    font-size: clamp(2.4rem, 7.6vw, 6rem);
+  }
+
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-xs text-soft transition-colors hover:border-paper hover:text-paper;
+  }
+
+  .btn-light {
+    @apply inline-flex items-center justify-center gap-3 rounded-full bg-paper px-6 py-3 font-mono text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5;
+  }
+
+  .btn-circle {
+    @apply inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-paper text-paper transition-colors hover:bg-paper hover:text-ink;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-surface/60;
+  }
+
+  .ring-deco {
+    @apply pointer-events-none absolute rounded-full border border-white/[0.07];
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

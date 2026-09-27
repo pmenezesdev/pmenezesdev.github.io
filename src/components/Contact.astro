@@ -1,0 +1,30 @@
+---
+import Icon from './Icon.astro';
+import { site, whatsappUrl } from '../data/site';
+---
+
+<section id="contato" class="relative overflow-hidden py-24 sm:py-32" aria-labelledby="contato-titulo">
+  <div class="ring-deco -bottom-64 -left-40 size-[560px]"></div>
+  <div class="ring-deco -top-24 right-10 size-[220px]"></div>
+
+  <div class="container-page relative text-center">
+    <p class="eyebrow">.../Contato...</p>
+    <h2 id="contato-titulo" class="display reveal mt-6">Vamos<br />conversar?</h2>
+    <p class="mx-auto mt-8 max-w-md text-soft">
+      Conte sua ideia e receba um <em>orçamento sem compromisso</em>. Respondo pessoalmente, normalmente no
+      mesmo dia.
+    </p>
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <a href={whatsappUrl()} data-wa target="_blank" rel="noopener" class="btn-light !px-8 !py-4">
+        <Icon name="whatsapp" size={20} /> Chamar no WhatsApp
+      </a>
+      {
+        site.contact.email && (
+          <a href={`mailto:${site.contact.email}`} class="pill !px-6 !py-4 !text-sm">
+            <Icon name="mail" /> {site.contact.email}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>

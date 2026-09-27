@@ -1,0 +1,141 @@
+---
+import '../styles/global.css';
+import { faq, services, site, stack } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const { title = site.seo.title, description = site.seo.description, noindex = false } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
+const ogImage = new URL('/og.png', Astro.site ?? site.url).href;
+const sameAs = Object.values(site.social).filter(Boolean);
+
+const address = {
+  '@type': 'PostalAddress',
+  addressLocality: site.city,
+  addressRegion: site.state,
+  addressCountry: 'BR',
+};
+
+const person = {
+  '@type': 'Person',
+  '@id': `${site.url}/#pedro`,
+  name: site.name,
+  jobTitle: site.title,
+  url: site.url,
+  image: ogImage,
+  address,
+  sameAs,
+  knowsAbout: stack.flatMap((group) => group.items),
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      inLanguage: 'pt-BR',
+    },
+    person,
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${site.url}/#service`,
+      name: `${site.name} — Desenvolvimento Web`,
+      url: site.url,
+      image: ogImage,
+      description: site.seo.description,
+      telephone: `+${site.contact.whatsapp}`,
+      ...(site.contact.email && { email: site.contact.email }),
+      address,
+      areaServed: { '@type': 'Country', name: 'Brasil' },
+      founder: { '@id': `${site.url}/#pedro` },
+      sameAs,
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Serviços de desenvolvimento',
+        itemListElement: services.map((service) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: service.title, description: service.description },
+        })),
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: { '@type': 'Answer', text: item.answer },
+      })),
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={site.seo.keywords.join(', ')} />
+    <meta name="author" content={site.name} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#0f0f0f" />
+    <meta name="geo.region" content={`BR-${site.state}`} />
+    <meta name="geo.placename" content={site.city} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${site.name} — ${site.title}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a
+      href="#conteudo"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-paper focus:px-4 focus:py-2 focus:text-ink"
+    >
+      Pular para o conteúdo
+    </a>
+    <slot />
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px' },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

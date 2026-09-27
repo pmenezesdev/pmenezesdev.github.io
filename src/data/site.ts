@@ -47,7 +47,7 @@ export const site = {
 // e a mensagem do WhatsApp chega identificando a indicação.
 export const sellers: { slug: string; name: string }[] = [
   { slug: 'renata', name: 'Renata' },
-  { slug: 'cesar', name: 'Cesar' },
+  { slug: 'henrique', name: 'Henrique' },
 ];
 
 export type Project = {

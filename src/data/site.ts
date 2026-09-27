@@ -31,8 +31,8 @@ export const site = {
     ],
   },
   contact: {
-    // TODO: número com DDI + DDD, só dígitos. Ex.: 5581999999999
-    whatsapp: '5581999999999',
+    // Número com DDI + DDD, só dígitos.
+    whatsapp: '5581989025602',
     // TODO: preencher ou deixar vazio ('') para esconder.
     email: '',
   },

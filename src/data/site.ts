@@ -62,6 +62,8 @@ export type Project = {
   topic?: string;
   /** Observação curta, exibida abaixo da descrição. */
   note?: string;
+  /** `contain` mostra a imagem inteira. O padrão cobre o card e corta o excesso. */
+  fit?: 'contain';
 };
 
 export const projects: Project[] = [
@@ -97,6 +99,7 @@ export const projects: Project[] = [
       'Dashboard do DojoControl com alunos ativos, receita do mês, aniversariantes, inadimplência e avisos do dojo. Os números são ilustrativos.',
     topic: 'um sistema interno',
     note: 'Os dados da tela são ilustrativos.',
+    fit: 'contain',
   },
 ];
 

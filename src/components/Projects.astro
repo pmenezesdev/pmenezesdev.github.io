@@ -38,7 +38,17 @@ const initialIndex = 0;
           data-carousel-item
           aria-label={`${index + 1} de ${projects.length}: ${project.title}`}
         >
-          <div class="relative aspect-[16/10] overflow-hidden bg-surface md:aspect-auto md:w-1/2">
+          <div
+            class:list={[
+              'relative overflow-hidden bg-surface',
+              project.fit === 'contain'
+                ? 'w-full self-center md:w-1/2'
+                : 'aspect-[16/10] md:aspect-auto md:w-1/2',
+            ]}
+            style={project.fit === 'contain'
+              ? { aspectRatio: `${project.image.width} / ${project.image.height}` }
+              : undefined}
+          >
             <Image
               src={project.image}
               alt={project.imageAlt}
@@ -47,7 +57,12 @@ const initialIndex = 0;
               quality={90}
               loading={index === initialIndex ? 'eager' : 'lazy'}
               fetchpriority={index === initialIndex ? 'high' : 'auto'}
-              class="size-full object-cover object-top transition-transform duration-700 group-hover/card:scale-105"
+              class:list={[
+                'size-full',
+                project.fit === 'contain'
+                  ? 'object-contain'
+                  : 'object-cover object-top transition-transform duration-700 group-hover/card:scale-105',
+              ]}
             />
             <span class="absolute top-3 left-3 rounded-full bg-ink/80 px-3 py-1 font-mono text-[11px] backdrop-blur">
               {project.category}

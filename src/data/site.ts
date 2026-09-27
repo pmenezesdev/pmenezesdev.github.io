@@ -58,8 +58,7 @@ export type Project = {
   image: ImageMetadata;
   imageAlt: string;
   liveUrl?: string;
-  repoUrl?: string;
-  /** Assunto da mensagem do botão "Quero um parecido", exibido quando não há links. */
+  /** Assunto da mensagem do botão "Quero um parecido", exibido quando não há demo. */
   topic?: string;
 };
 
@@ -74,7 +73,6 @@ export const projects: Project[] = [
     imageAlt:
       'Página inicial do cardápio digital da Cumbuca, com uma cumbuca de sopa e o título O Autêntico Sabor do Sertão na Cumbuca',
     liveUrl: 'https://pmenezesdev.github.io/cumbuca-soparia/',
-    repoUrl: 'https://github.com/pmenezesdev/cumbuca-soparia',
   },
   {
     title: 'SUPLOG — Comércio Exterior',
@@ -85,7 +83,6 @@ export const projects: Project[] = [
     image: suplogImage,
     imageAlt: 'Tela inicial da landing page da SUPLOG, com fotos de navios e contêineres',
     liveUrl: 'https://pmenezesdev.github.io/suplog/',
-    repoUrl: 'https://github.com/pmenezesdev/suplog',
   },
   {
     // TODO: substituir pelos dados do projeto que ainda será lançado.

@@ -64,7 +64,11 @@ const initialIndex = 0;
             </ul>
 
             <div class="mt-auto flex items-center gap-3 pt-2">
-              {!project.liveUrl && !project.repoUrl ? (
+              {project.liveUrl ? (
+                <a href={project.liveUrl} target="_blank" rel="noopener" class="btn-light !px-5 !py-2.5 !text-xs">
+                  Ver projeto
+                </a>
+              ) : (
                 <a
                   href={whatsappUrl(project.topic)}
                   data-wa
@@ -75,25 +79,6 @@ const initialIndex = 0;
                 >
                   Quero um parecido
                 </a>
-              ) : (
-                <>
-                  {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" rel="noopener" class="btn-light !px-5 !py-2.5 !text-xs">
-                      Ver projeto
-                    </a>
-                  )}
-                  {project.repoUrl && (
-                    <a
-                      href={project.repoUrl}
-                      target="_blank"
-                      rel="noopener"
-                      class="btn-circle !size-9"
-                      aria-label={`Código de ${project.title} no GitHub`}
-                    >
-                      <Icon name="github" size={16} />
-                    </a>
-                  )}
-                </>
               )}
             </div>
           </div>

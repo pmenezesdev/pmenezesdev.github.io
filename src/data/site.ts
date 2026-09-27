@@ -1,6 +1,6 @@
 import type { ImageMetadata } from 'astro';
 import suplogImage from '../assets/projects/suplog.png';
-import oxenteImage from '../assets/projects/oxente.png';
+import cumbucaImage from '../assets/projects/cumbuca.png';
 import comingSoonImage from '../assets/projects/em-breve.png';
 import { buildWhatsappMessage, buildWhatsappUrl } from '../lib/whatsapp';
 
@@ -65,14 +65,16 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: 'Oxente — Soparia e Comedoria',
+    title: 'Cumbuca — Soparia',
     category: 'Cardápio digital',
     description:
-      'Cardápio digital para restaurante de Caruaru: catálogo de caldos e sopas com fotos, sacola de pedidos e envio do pedido pronto direto para o WhatsApp da casa.',
-    stack: ['HTML', 'Tailwind CSS', 'JavaScript', 'WhatsApp'],
-    image: oxenteImage,
-    imageAlt: 'Página inicial do cardápio digital da Oxente, com uma cumbuca de sopa e o título O Autêntico Sabor do Sertão na Cumbuca',
-    topic: 'um cardápio digital',
+      'Cardápio digital de uma soparia nordestina: catálogo de caldos, cuscuz e tapioca com fotos, sacola de pedidos e mensagem do pedido pronta para enviar.',
+    stack: ['HTML', 'Tailwind CSS', 'JavaScript'],
+    image: cumbucaImage,
+    imageAlt:
+      'Página inicial do cardápio digital da Cumbuca, com uma cumbuca de sopa e o título O Autêntico Sabor do Sertão na Cumbuca',
+    liveUrl: 'https://pmenezesdev.github.io/cumbuca-soparia/',
+    repoUrl: 'https://github.com/pmenezesdev/cumbuca-soparia',
   },
   {
     title: 'SUPLOG — Comércio Exterior',

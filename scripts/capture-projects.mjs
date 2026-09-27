@@ -1,14 +1,10 @@
 // Captura as telas dos projetos em alta resolução (2x) para os cards do portfólio.
 // Uso: npm run capture
-import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 
 const shots = [
   { url: 'https://pmenezesdev.github.io/suplog/', out: 'src/assets/projects/suplog.png' },
-  {
-    url: pathToFileURL('C:/Dev/OxenteComedoria/index.html').href,
-    out: 'src/assets/projects/oxente.png',
-  },
+  { url: 'https://pmenezesdev.github.io/cumbuca-soparia/', out: 'src/assets/projects/cumbuca.png' },
 ];
 
 const browser = await chromium.launch();

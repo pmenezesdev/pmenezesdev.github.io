@@ -34,20 +34,20 @@ const initialIndex = 0;
     {
       projects.map((project, index) => (
         <article
-          class="card group/card flex w-[88%] shrink-0 snap-center flex-col overflow-hidden transition-opacity duration-500 data-[active=false]:opacity-50 md:w-full"
+          class="card group/card flex w-[88%] shrink-0 snap-center flex-col overflow-hidden transition-opacity duration-500 data-[active=false]:opacity-50 md:w-full md:flex-row"
           data-carousel-item
           aria-label={`${index + 1} de ${projects.length}: ${project.title}`}
         >
-          <div class="relative aspect-[4/3] w-full overflow-hidden bg-surface sm:aspect-[16/10]">
+          <div class="relative aspect-[4/3] w-full overflow-hidden bg-surface md:aspect-auto md:w-1/2">
             <Image
               src={project.image}
               alt={project.imageAlt}
               widths={[480, 800, 1200, 1600, 2000]}
-              sizes="88vw"
+              sizes="(min-width: 768px) 32vw, 78vw"
               quality={90}
               loading={index === initialIndex ? 'eager' : 'lazy'}
               fetchpriority={index === initialIndex ? 'high' : 'auto'}
-              class="size-full object-cover object-center sm:object-contain"
+              class="size-full object-cover object-center transition-transform duration-700 group-hover/card:scale-105 md:absolute md:inset-0 md:h-full md:w-full md:object-top"
             />
             <span class="absolute top-3 left-3 rounded-full bg-ink/80 px-3 py-1 font-mono text-[11px] backdrop-blur">
               {project.category}

@@ -34,35 +34,20 @@ const initialIndex = 0;
     {
       projects.map((project, index) => (
         <article
-          class:list={[
-            'card group/card flex w-[88%] shrink-0 snap-center flex-col overflow-hidden transition-opacity duration-500 data-[active=false]:opacity-50 md:w-full',
-            project.fit === 'contain' ? '' : 'md:flex-row',
-          ]}
+          class="card group/card flex w-[88%] shrink-0 snap-center flex-col overflow-hidden transition-opacity duration-500 data-[active=false]:opacity-50 md:w-full"
           data-carousel-item
           aria-label={`${index + 1} de ${projects.length}: ${project.title}`}
         >
-          <div
-            class:list={[
-              'relative overflow-hidden bg-surface',
-              project.fit === 'contain'
-                ? 'aspect-[4/3] w-full sm:aspect-[64/35]'
-                : 'aspect-[16/10] md:aspect-auto md:w-1/2',
-            ]}
-          >
+          <div class="relative aspect-[4/3] w-full overflow-hidden bg-surface sm:aspect-[16/10]">
             <Image
               src={project.image}
               alt={project.imageAlt}
               widths={[480, 800, 1200, 1600, 2000]}
-              sizes={project.fit === 'contain' ? '88vw' : '(min-width: 768px) 32vw, 78vw'}
+              sizes="88vw"
               quality={90}
               loading={index === initialIndex ? 'eager' : 'lazy'}
               fetchpriority={index === initialIndex ? 'high' : 'auto'}
-              class:list={[
-                'size-full',
-                project.fit === 'contain'
-                  ? 'object-cover object-center sm:object-contain'
-                  : 'object-cover object-top transition-transform duration-700 group-hover/card:scale-105',
-              ]}
+              class="size-full object-cover object-center sm:object-contain"
             />
             <span class="absolute top-3 left-3 rounded-full bg-ink/80 px-3 py-1 font-mono text-[11px] backdrop-blur">
               {project.category}

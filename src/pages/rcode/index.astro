@@ -1,216 +1,186 @@
 ---
+import suplogImage from '../../assets/projects/suplog.png';
+import cumbucaImage from '../../assets/projects/cumbuca.png';
+import dojoImage from '../../assets/projects/dojo.png';
+
 const whatsapp = "https://wa.me/5581989025602?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20R.Kode%20e%20quero%20conversar%20sobre%20um%20projeto.";
+const projects = [
+  {
+    title: 'SUPLOG — Comércio Exterior',
+    category: 'Landing page',
+    description: 'Site comercial com foco em credibilidade, serviços e geração de contato direto com o time de vendas.',
+    image: suplogImage.src,
+    href: 'https://pmenezesdev.github.io/suplog/',
+    status: 'Projeto publicado',
+  },
+  {
+    title: 'Cumbuca — Soparia',
+    category: 'Cardápio digital',
+    description: 'Experiência mobile para catálogo, escolha de produtos e pedido simplificado pelo WhatsApp.',
+    image: cumbucaImage.src,
+    href: 'https://pmenezesdev.github.io/cumbuca-soparia/',
+    status: 'Projeto publicado',
+  },
+  {
+    title: 'DojoControl — Nindô-Kan',
+    category: 'Sistema interno',
+    description: 'Painel de gestão para alunos, turmas, mensalidades, graduações e rotina administrativa.',
+    image: dojoImage.src,
+    href: '',
+    status: 'Demonstração visual',
+  },
+];
 ---
 <!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#080a08" />
     <meta name="description" content="R.Kode — sites, landing pages, sistemas e automações para negócios que querem crescer com presença digital profissional." />
     <meta name="keywords" content="R.Kode, criação de sites, landing page, sistemas web, automações, desenvolvimento web" />
-    <meta property="og:title" content="R.Kode — Ideias que viram produto digital" />
-    <meta property="og:description" content="Estratégia, design e desenvolvimento para transformar ideias em experiências digitais profissionais." />
+    <meta property="og:title" content="R.Kode — Soluções digitais que geram resultado" />
+    <meta property="og:description" content="Estratégia, design e desenvolvimento para transformar ideias em produtos digitais profissionais." />
     <meta property="og:type" content="website" />
+    <link rel="icon" type="image/png" href="/rcode/brand/rkode-mark-transparent.png" />
     <title>R.Kode — Sites, Sistemas e Produtos Digitais</title>
     <style>
-      :root {
-        --bg:#070807; --surface:#111311; --surface-2:#191c19; --text:#f5f7f2; --muted:#adb3aa;
-        --accent:#95ff3d; --accent-2:#cbff9f; --line:rgba(255,255,255,.10); --paper:#f7f8f3; --ink:#10110f;
-        --radius:28px; --shadow:0 30px 90px rgba(0,0,0,.35);
+      :root{
+        --bg:#080a08;--bg-soft:#0e110e;--surface:#121512;--surface-2:#181c18;--paper:#f5f6f2;
+        --text:#f5f7f2;--muted:#a4ada1;--ink:#111310;--accent:#95ff3d;--accent-soft:#caff9e;
+        --line:rgba(255,255,255,.10);--line-strong:rgba(149,255,61,.35);--radius:28px;
       }
-      *{box-sizing:border-box}
-      html{scroll-behavior:smooth}
-      body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5;overflow-x:hidden}
-      a{color:inherit;text-decoration:none}
-      button,a{-webkit-tap-highlight-color:transparent}
-      .shell{width:min(1180px,calc(100% - 32px));margin:0 auto}
-      .topbar{position:sticky;top:14px;z-index:40;padding-top:14px}
-      .nav{height:64px;padding:0 10px 0 18px;border:1px solid var(--line);background:rgba(10,11,10,.86);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:space-between;border-radius:999px;box-shadow:0 10px 50px rgba(0,0,0,.22)}
-      .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.02em}
-      .brandmark{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#0b0c0a;font-size:13px;font-weight:950;box-shadow:0 0 40px rgba(149,255,61,.28)}
-      .links{display:flex;gap:26px;align-items:center;font-size:14px;color:#d7dbd4}
-      .links a:hover{color:var(--accent)}
-      .pill{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:999px;padding:13px 18px;background:var(--accent);color:#0b0c0a;font-weight:900;transition:.2s transform,.2s box-shadow}
-      .pill:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(149,255,61,.18)}
-      .pill.dark{background:#10120f;color:#fff;border:1px solid rgba(255,255,255,.12)}
-      .hero{padding:34px 0 20px}
-      .hero-card{position:relative;min-height:650px;padding:48px;border-radius:38px;background:var(--paper);color:var(--ink);overflow:hidden;box-shadow:var(--shadow)}
-      .hero-card:before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(149,255,61,.5),rgba(149,255,61,0) 67%);right:-70px;top:-60px;filter:blur(10px)}
-      .hero-card:after{content:"";position:absolute;inset:auto 0 0 0;height:150px;background:linear-gradient(180deg,transparent,rgba(235,239,230,.92));pointer-events:none}
-      .eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:#4c5149}
-      .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px rgba(87,186,0,.55)}
-      h1{position:relative;z-index:2;margin:20px 0 18px;max-width:860px;font-size:clamp(48px,7.3vw,102px);line-height:.92;letter-spacing:-.065em}
-      .accent-word{display:inline-block;position:relative}
-      .accent-word:after{content:"";position:absolute;left:0;right:0;bottom:3px;height:10px;border-radius:30px;background:var(--accent);z-index:-1;transform:rotate(-1deg)}
-      .hero-grid{position:relative;z-index:3;display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:end;margin-top:56px}
-      .lead{max-width:600px;font-size:18px;color:#4f554d;margin:0 0 26px}
-      .actions{display:flex;gap:12px;flex-wrap:wrap}
-      .mini-panel{justify-self:end;width:min(100%,390px);background:#0c0d0c;color:#fff;border-radius:28px;padding:22px;box-shadow:0 30px 70px rgba(0,0,0,.22);transform:rotate(1.3deg)}
-      .mini-panel .logo{background:#727272;border-radius:19px;overflow:hidden;padding:8px;display:grid;place-items:center}
-      .mini-panel img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px}
-      .mini-copy{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-top:18px}
-      .mini-copy strong{font-size:20px;line-height:1.05}
-      .mini-copy span{color:#aeb4aa;font-size:12px;text-align:right}
-      .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:22px;border:1px solid var(--line);background:var(--line);border-radius:24px;overflow:hidden}
-      .stat{background:#101210;padding:23px 20px;text-align:center}
-      .stat b{display:block;font-size:24px;letter-spacing:-.04em}
-      .stat span{font-size:12px;color:#9ca39a}
-      section{padding:92px 0}
-      .section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:36px}
-      .kicker{color:var(--accent);font-size:13px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
-      h2{margin:10px 0 0;font-size:clamp(38px,5vw,70px);line-height:.98;letter-spacing:-.055em;max-width:760px}
-      .section-head p{max-width:440px;color:var(--muted);margin:0}
-      .services{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-      .service{position:relative;min-height:250px;padding:28px;border:1px solid var(--line);border-radius:26px;background:linear-gradient(145deg,#151815,#0d0f0d);overflow:hidden;transition:.25s transform,.25s border-color}
-      .service:hover{transform:translateY(-4px);border-color:rgba(149,255,61,.45)}
-      .service small{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--accent)}
-      .service h3{font-size:30px;letter-spacing:-.04em;margin:48px 0 10px}
-      .service p{color:var(--muted);margin:0;max-width:520px}
-      .service:after{content:"↗";position:absolute;right:24px;top:24px;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);font-size:20px}
-      .marquee{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:18px 0;background:#0d0f0d}
-      .marquee-track{display:inline-block;animation:roll 24s linear infinite;font-weight:950;font-size:clamp(28px,4vw,54px);letter-spacing:-.045em}
-      .marquee span{color:var(--accent);padding:0 18px}
-      @keyframes roll{to{transform:translateX(-50%)}}
-      .work-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
-      .case{position:relative;min-height:390px;border-radius:28px;overflow:hidden;padding:26px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid rgba(255,255,255,.11);background:#151715}
-      .case:first-child{grid-row:span 2;min-height:796px;background:radial-gradient(circle at 70% 20%,rgba(149,255,61,.23),transparent 28%),#131513}
-      .case:nth-child(2){background:linear-gradient(135deg,#e9ede4,#b9c3b2);color:#111}
-      .case:nth-child(3){background:linear-gradient(135deg,#171918,#272b27)}
-      .case-top{display:flex;justify-content:space-between;gap:16px;align-items:center}
-      .tag{display:inline-flex;padding:8px 11px;border-radius:999px;font-size:12px;border:1px solid currentColor;opacity:.75}
-      .case h3{font-size:clamp(34px,4vw,58px);line-height:1;letter-spacing:-.05em;margin:0 0 12px}
-      .case p{max-width:540px;margin:0;opacity:.72}
-      .mock{margin:auto;width:min(80%,520px);aspect-ratio:4/3;border-radius:22px;background:#f7f8f3;box-shadow:0 30px 70px rgba(0,0,0,.28);padding:12px;transform:rotate(-2deg)}
-      .mock-inner{height:100%;border-radius:15px;background:#0b0c0b;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-      .mock-inner div{border-radius:12px;background:linear-gradient(135deg,#1a1c1a,#2c302b);border:1px solid #313630}
-      .mock-inner div:first-child{grid-column:1/-1;background:linear-gradient(110deg,#10120f 55%,#86eb34)}
-      .process-wrap{border:1px solid var(--line);border-radius:30px;overflow:hidden}
-      .step{display:grid;grid-template-columns:90px 1fr .9fr;gap:24px;padding:28px;border-bottom:1px solid var(--line);align-items:center}
-      .step:last-child{border-bottom:0}
-      .step .n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--accent)}
-      .step h3{margin:0;font-size:24px}
-      .step p{margin:0;color:var(--muted)}
-      .price-card{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;background:var(--accent);color:#0c0d0b;padding:36px;border-radius:32px;align-items:center}
-      .price-card h2{margin:0}
-      .price-card p{max-width:600px;color:#28321f}
-      .price-box{background:#0c0d0b;color:#fff;border-radius:25px;padding:28px}
-      .price-box small{color:#9ba394}
-      .price-box strong{display:block;font-size:44px;letter-spacing:-.06em;margin:4px 0}
-      .price-box p{color:#aab1a5;font-size:13px;margin:0 0 18px}
-      .cta{position:relative;background:#f5f7f1;color:#10110f;border-radius:36px;padding:52px;overflow:hidden}
-      .cta:after{content:"";position:absolute;right:-100px;bottom:-130px;width:380px;height:380px;border-radius:50%;background:var(--accent);filter:blur(1px)}
-      .cta h2,.cta p,.cta .actions{position:relative;z-index:2}
-      .cta p{max-width:620px;color:#545a51;font-size:18px}
-      footer{padding:28px 0 48px;color:#7f867c;font-size:13px}
-      .footer-row{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:22px}
-      .reveal{opacity:0;transform:translateY(18px);transition:.7s opacity,.7s transform}
-      .reveal.on{opacity:1;transform:none}
-      @media(max-width:820px){
-        .links a:not(.pill){display:none} .nav{height:58px} .hero-card{padding:30px 22px;min-height:auto;border-radius:28px}
-        .hero-grid,.work-grid,.price-card{grid-template-columns:1fr} .mini-panel{justify-self:stretch;width:100%;margin-top:8px}
-        .stats{grid-template-columns:repeat(2,1fr)} section{padding:68px 0} .section-head{display:block} .section-head p{margin-top:18px}
-        .services{grid-template-columns:1fr} .service{min-height:220px} .case:first-child{grid-row:auto;min-height:560px} .case{min-height:340px}
-        .step{grid-template-columns:52px 1fr} .step p{grid-column:2} .cta{padding:34px 24px} .footer-row{display:block}
-      }
-      @media(max-width:520px){.shell{width:min(100% - 20px,1180px)} h1{font-size:50px} .hero-card{padding:26px 18px} .actions .pill{width:100%} .stats{border-radius:18px} .stat{padding:18px 10px} .section-head{margin-bottom:26px} .service,.case{border-radius:22px} .cta:after{opacity:.45}}
-      @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto} .marquee-track{animation:none} .reveal{opacity:1;transform:none;transition:none}}
+      *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% -10%,rgba(149,255,61,.07),transparent 26%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 72%)}
+      a{color:inherit;text-decoration:none}.shell{width:min(1180px,calc(100% - 32px));margin:0 auto}.topbar{position:sticky;top:12px;z-index:50;padding-top:12px}.nav{height:66px;padding:0 11px 0 18px;border:1px solid var(--line);background:rgba(8,10,8,.84);backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:space-between;border-radius:999px;box-shadow:0 16px 60px rgba(0,0,0,.26)}
+      .brand{display:flex;align-items:center;height:38px}.brand img{display:block;width:154px;max-height:38px;object-fit:contain;object-position:left center}.links{display:flex;gap:24px;align-items:center;color:#d7ddd4;font-size:13px}.links>a:not(.pill):hover{color:var(--accent)}
+      .pill{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:999px;padding:13px 18px;background:var(--accent);color:#0a0c09;font-weight:900;border:1px solid transparent;transition:.2s transform,.2s box-shadow,.2s background}.pill:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(149,255,61,.18)}.pill.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.18)}.pill.ghost:hover{border-color:var(--accent);color:var(--accent)}
+      .hero{padding:44px 0 26px}.hero-wrap{position:relative;min-height:680px;padding:58px;border:1px solid var(--line);border-radius:36px;overflow:hidden;background:linear-gradient(145deg,rgba(20,24,20,.96),rgba(8,10,8,.98));box-shadow:0 40px 100px rgba(0,0,0,.35)}.hero-wrap:before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;right:-120px;top:-180px;background:radial-gradient(circle,rgba(149,255,61,.28),rgba(149,255,61,0) 70%);filter:blur(8px)}.hero-wrap:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 64%,rgba(149,255,61,.03));pointer-events:none}
+      .eyebrow,.kicker{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}.eyebrow:before,.kicker:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px rgba(149,255,61,.55)}h1{position:relative;z-index:2;margin:22px 0 18px;max-width:880px;font-size:clamp(52px,7.5vw,104px);line-height:.92;letter-spacing:-.065em}.green{color:var(--accent)}.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:34px;align-items:end;margin-top:26px}.lead{max-width:600px;font-size:18px;color:#b8c0b5;margin:0 0 26px}.actions{display:flex;gap:12px;flex-wrap:wrap}
+      .visual{position:relative;min-height:390px;display:grid;place-items:center}.visual-glow{position:absolute;width:340px;height:340px;border-radius:50%;background:rgba(149,255,61,.12);filter:blur(8px)}.device{position:relative;width:min(100%,500px);aspect-ratio:16/10;border-radius:25px;background:#060706;border:1px solid rgba(255,255,255,.15);box-shadow:0 35px 80px rgba(0,0,0,.55);transform:perspective(900px) rotateY(-8deg) rotateX(3deg);padding:12px;overflow:hidden}.device img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:16px;display:block}.device:after{content:"";position:absolute;left:11%;right:11%;bottom:-18px;height:22px;background:linear-gradient(#2b302b,#0f110f);border-radius:0 0 20px 20px}.floating{position:absolute;padding:12px 15px;background:rgba(15,18,15,.94);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 55px rgba(0,0,0,.38);backdrop-filter:blur(12px);font-size:12px}.floating b{display:block;font-size:20px;color:var(--accent)}.float-a{right:1%;top:28%}.float-b{left:2%;bottom:16%}.hero-logo{position:absolute;right:32px;bottom:22px;width:220px;opacity:.10;filter:drop-shadow(0 0 25px rgba(149,255,61,.08))}
+      .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:18px;border:1px solid var(--line);background:var(--line);border-radius:24px;overflow:hidden}.trust-item{background:#0e110e;padding:22px 18px;display:flex;gap:13px;align-items:center}.trust-icon{width:38px;height:38px;border:1px solid rgba(149,255,61,.25);color:var(--accent);border-radius:12px;display:grid;place-items:center;font-weight:900}.trust-item b{display:block;font-size:15px}.trust-item span{font-size:12px;color:var(--muted)}
+      section{padding:96px 0}.section-head{display:flex;justify-content:space-between;gap:34px;align-items:end;margin-bottom:34px}.section-head h2{margin:10px 0 0;font-size:clamp(40px,5vw,70px);line-height:.98;letter-spacing:-.055em;max-width:780px}.section-head p{max-width:430px;color:var(--muted);margin:0}
+      .services{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.service{position:relative;min-height:220px;padding:24px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#121512,#0c0e0c);transition:.25s transform,.25s border-color,.25s background}.service:hover{transform:translateY(-5px);border-color:var(--line-strong);background:linear-gradient(145deg,#171b17,#0d100d)}.service-no{font:700 11px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--accent)}.service h3{font-size:24px;margin:52px 0 9px;letter-spacing:-.04em}.service p{margin:0;color:var(--muted);font-size:14px}.service-arrow{position:absolute;right:20px;top:20px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center}
+      .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.project{border:1px solid var(--line);background:#0e110e;border-radius:26px;overflow:hidden;transition:.25s transform,.25s border-color}.project:hover{transform:translateY(-5px);border-color:rgba(149,255,61,.35)}.project-shot{position:relative;aspect-ratio:16/10;overflow:hidden;background:#161916}.project-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:.45s transform}.project:hover .project-shot img{transform:scale(1.025)}.project-shot:after{content:"";position:absolute;inset:auto 0 0;height:48%;background:linear-gradient(transparent,rgba(6,7,6,.72))}.project-status{position:absolute;left:14px;bottom:14px;z-index:2;padding:7px 10px;border-radius:999px;background:rgba(8,10,8,.82);border:1px solid rgba(149,255,61,.25);color:var(--accent);font-size:11px;font-weight:800;backdrop-filter:blur(8px)}.project-body{padding:20px}.project-top{display:flex;justify-content:space-between;gap:12px;align-items:start}.project small{color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:.12em}.project h3{font-size:23px;letter-spacing:-.035em;margin:7px 0 9px}.project p{color:var(--muted);font-size:14px;margin:0}.project-link{width:38px;height:38px;flex:0 0 38px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center}
+      .process{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:28px;overflow:hidden;background:#0e110e}.step{padding:28px;border-right:1px solid var(--line);min-height:250px}.step:last-child{border-right:0}.step-no{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(149,255,61,.30);color:var(--accent);font:700 12px ui-monospace,SFMono-Regular,Menlo,monospace}.step h3{font-size:23px;margin:62px 0 9px}.step p{margin:0;color:var(--muted);font-size:14px}
+      .offer{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;background:linear-gradient(135deg,#95ff3d,#b6ff78);color:#0a0c09;padding:40px;border-radius:30px;align-items:center}.offer h2{font-size:clamp(38px,5vw,68px);line-height:.96;letter-spacing:-.055em;margin:10px 0 14px}.offer p{max-width:640px;color:#24301c}.price{background:#0c0f0c;color:#fff;padding:28px;border-radius:24px}.price small{color:#a7b0a3}.price strong{display:block;font-size:42px;letter-spacing:-.055em;margin:4px 0}.price p{color:#aab3a7;font-size:13px}.price .pill{margin-top:8px}
+      .faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px}.faq-intro h2{font-size:clamp(40px,5vw,64px);letter-spacing:-.05em;line-height:1;margin:10px 0 14px}.faq-intro p{color:var(--muted)}details{border:1px solid var(--line);border-radius:18px;background:#0e110e;margin-bottom:10px;padding:0 18px}summary{cursor:pointer;list-style:none;padding:19px 0;font-weight:750;display:flex;justify-content:space-between;gap:20px}summary::-webkit-details-marker{display:none}summary:after{content:"+";color:var(--accent);font-size:20px}details[open] summary:after{content:"−"}details p{margin:0;padding:0 0 18px;color:var(--muted);font-size:14px}
+      .cta{position:relative;padding:48px;border:1px solid rgba(149,255,61,.28);border-radius:32px;background:radial-gradient(circle at 88% 50%,rgba(149,255,61,.22),transparent 28%),#101410;overflow:hidden}.cta h2{font-size:clamp(40px,5.5vw,72px);line-height:.96;letter-spacing:-.06em;margin:10px 0 15px;max-width:820px}.cta p{color:var(--muted);max-width:620px;font-size:17px}.cta .actions{margin-top:24px}
+      footer{padding:30px 0 48px}.footer-row{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:22px;border-top:1px solid var(--line);color:#7f887c;font-size:12px}.footer-logo{width:160px;opacity:.65}.reveal{opacity:0;transform:translateY(18px);transition:.7s opacity,.7s transform}.reveal.on{opacity:1;transform:none}
+      @media(max-width:920px){.links>a:not(.pill){display:none}.hero-wrap{padding:38px 26px}.hero-grid{grid-template-columns:1fr}.visual{min-height:340px;margin-top:16px}.trust{grid-template-columns:repeat(2,1fr)}.services,.project-grid{grid-template-columns:repeat(2,1fr)}.process{grid-template-columns:repeat(2,1fr)}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid var(--line)}.offer,.faq{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:18px}.hero-logo{display:none}}
+      @media(max-width:620px){.shell{width:min(100% - 20px,1180px)}.nav{height:58px;padding-left:14px}.brand img{width:126px}.links .pill{padding:10px 13px;font-size:12px}.hero{padding-top:24px}.hero-wrap{padding:28px 18px;border-radius:25px;min-height:auto}h1{font-size:52px}.lead{font-size:16px}.actions .pill{width:100%}.device{width:94%;transform:none}.floating{display:none}.trust{grid-template-columns:1fr 1fr}.trust-item{padding:16px 12px}.trust-item span{display:none}section{padding:68px 0}.services,.project-grid,.process{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line);min-height:200px}.step:last-child{border-bottom:0}.step h3{margin-top:38px}.offer{padding:28px 20px}.price strong{font-size:34px}.cta{padding:30px 22px}.footer-row{align-items:flex-start;flex-direction:column}}
+      @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
     </style>
   </head>
   <body>
     <div class="topbar shell">
       <nav class="nav" aria-label="Navegação principal">
-        <a class="brand" href="#top"><span class="brandmark">R.</span><span>R.KODE</span></a>
+        <a class="brand" href="#top" aria-label="R.Kode — início"><img src="/rcode/brand/rkode-logo-transparent.png" alt="R.Kode" /></a>
         <div class="links">
-          <a href="#servicos">Serviços</a><a href="#projetos">Projetos</a><a href="#processo">Processo</a>
-          <a class="pill" href={whatsapp} target="_blank" rel="noopener">Começar projeto ↗</a>
+          <a href="#servicos">Serviços</a><a href="#projetos">Projetos</a><a href="#processo">Processo</a><a href="#faq">Dúvidas</a>
+          <a class="pill" href={whatsapp} target="_blank" rel="noopener">Falar no WhatsApp ↗</a>
         </div>
       </nav>
     </div>
 
     <main id="top">
       <div class="hero shell">
-        <div class="hero-card">
-          <div class="eyebrow"><span class="dot"></span> Estratégia + Design + Desenvolvimento</div>
-          <h1>Ideias que viram <span class="accent-word">produto digital.</span></h1>
+        <div class="hero-wrap">
+          <div class="eyebrow">Desenvolvimento e soluções digitais</div>
+          <h1>Sites e soluções digitais que <span class="green">geram resultado.</span></h1>
           <div class="hero-grid">
             <div>
-              <p class="lead">Criamos sites, landing pages, sistemas e automações para negócios que querem vender melhor, operar com mais eficiência e transmitir uma imagem profissional.</p>
-              <div class="actions"><a class="pill" href={whatsapp} target="_blank" rel="noopener">Falar com a R.Kode ↗</a><a class="pill dark" href="#projetos">Ver projetos</a></div>
+              <p class="lead">Na R.Kode desenvolvemos sites, landing pages, sistemas e automações sob medida para negócios que querem crescer, profissionalizar a presença online e operar melhor.</p>
+              <div class="actions"><a class="pill" href={whatsapp} target="_blank" rel="noopener">Solicitar orçamento ↗</a><a class="pill ghost" href="#projetos">Ver projetos</a></div>
             </div>
-            <div class="mini-panel" aria-label="Identidade visual R.Kode">
-              <div class="logo"><img src="/assets/rcode-logo.jpg" alt="Logo R.Kode" /></div>
-              <div class="mini-copy"><strong>Design que chama atenção.<br/>Código que sustenta.</strong><span>R.KODE<br/>DIGITAL STUDIO</span></div>
+            <div class="visual" aria-label="Prévia de projeto desenvolvido pela R.Kode">
+              <div class="visual-glow"></div>
+              <div class="device"><img src={suplogImage.src} alt="Prévia da landing page SUPLOG" /></div>
+              <div class="floating float-a"><span>Projetos web</span><b>R$ 1.500–2.000</b></div>
+              <div class="floating float-b"><span>Entrega pensada para</span><b>resultado</b></div>
             </div>
           </div>
+          <img class="hero-logo" src="/rcode/brand/rkode-logo-transparent.png" alt="" aria-hidden="true" />
         </div>
-        <div class="stats reveal">
-          <div class="stat"><b>Web</b><span>Sites & landing pages</span></div>
-          <div class="stat"><b>Sistemas</b><span>Painéis & operações</span></div>
-          <div class="stat"><b>Automação</b><span>Integrações & fluxos</span></div>
-          <div class="stat"><b>Suporte</b><span>Depois da entrega</span></div>
+        <div class="trust reveal">
+          <div class="trust-item"><span class="trust-icon">↗</span><div><b>Entrega objetiva</b><span>Escopo e prazo definidos</span></div></div>
+          <div class="trust-item"><span class="trust-icon">✓</span><div><b>Qualidade profissional</b><span>Design, código e performance</span></div></div>
+          <div class="trust-item"><span class="trust-icon">∞</span><div><b>Suporte próximo</b><span>Antes e depois da entrega</span></div></div>
+          <div class="trust-item"><span class="trust-icon">R$</span><div><b>Preço claro</b><span>Projetos web a partir de R$ 1.500</span></div></div>
         </div>
       </div>
 
       <section id="servicos">
         <div class="shell">
-          <div class="section-head reveal"><div><div class="kicker">O que fazemos</div><h2>Do primeiro clique à operação do negócio.</h2></div><p>Não entregamos só uma tela bonita. Pensamos no objetivo comercial, na experiência do usuário e na tecnologia certa para cada etapa.</p></div>
+          <div class="section-head reveal"><div><div class="kicker">Nossos serviços</div><h2>Soluções completas <span class="green">para o seu negócio.</span></h2></div><p>Do site institucional ao sistema personalizado, escolhemos a solução que resolve o problema sem inflar o projeto.</p></div>
           <div class="services">
-            <article class="service reveal"><small>01 / PRESENÇA</small><h3>Landing pages & sites</h3><p>Páginas rápidas, responsivas e planejadas para gerar confiança, contato e conversão.</p></article>
-            <article class="service reveal"><small>02 / PRODUTO</small><h3>Sistemas web</h3><p>Dashboards, áreas de cliente, CRMs, agendamentos e soluções sob medida para sua rotina.</p></article>
-            <article class="service reveal"><small>03 / EFICIÊNCIA</small><h3>Automações & integrações</h3><p>Conectamos ferramentas, APIs e fluxos para reduzir trabalho manual e erros operacionais.</p></article>
-            <article class="service reveal"><small>04 / EVOLUÇÃO</small><h3>Manutenção & suporte</h3><p>Melhorias contínuas, correções e acompanhamento para o projeto continuar evoluindo.</p></article>
+            <article class="service reveal"><span class="service-no">01 / WEB</span><span class="service-arrow">↗</span><h3>Sites institucionais</h3><p>Sites modernos, rápidos e responsivos para transmitir credibilidade e gerar contato.</p></article>
+            <article class="service reveal"><span class="service-no">02 / CONVERSÃO</span><span class="service-arrow">↗</span><h3>Landing pages</h3><p>Páginas focadas em campanhas, lançamentos, tráfego pago e geração de leads.</p></article>
+            <article class="service reveal"><span class="service-no">03 / SISTEMAS</span><span class="service-arrow">↗</span><h3>Sistemas web</h3><p>Dashboards, áreas de cliente, CRMs e soluções sob medida para a operação.</p></article>
+            <article class="service reveal"><span class="service-no">04 / COMÉRCIO</span><span class="service-arrow">↗</span><h3>E-commerce</h3><p>Catálogo, carrinho, checkout, pedidos e integrações para vender online.</p></article>
+            <article class="service reveal"><span class="service-no">05 / AUTOMAÇÃO</span><span class="service-arrow">↗</span><h3>Automações e integrações</h3><p>APIs e fluxos conectados para reduzir trabalho manual e erros operacionais.</p></article>
+            <article class="service reveal"><span class="service-no">06 / CONTINUIDADE</span><span class="service-arrow">↗</span><h3>Suporte e evolução</h3><p>Correções, melhorias e acompanhamento contínuo depois da publicação.</p></article>
           </div>
         </div>
       </section>
 
-      <div class="marquee" aria-hidden="true"><div class="marquee-track">INOVAR <span>✦</span> CRIAR <span>✦</span> CONVERTER <span>✦</span> AUTOMATIZAR <span>✦</span> INOVAR <span>✦</span> CRIAR <span>✦</span> CONVERTER <span>✦</span> AUTOMATIZAR <span>✦</span></div></div>
-
       <section id="projetos">
         <div class="shell">
-          <div class="section-head reveal"><div><div class="kicker">Projetos</div><h2>Projetos reais, pensados para objetivos reais.</h2></div><p>Uma amostra do tipo de solução que a R.Kode consegue colocar no ar: comunicação, venda e operação.</p></div>
-          <div class="work-grid">
-            <a class="case reveal" href="https://pmenezesdev.github.io/suplog/" target="_blank" rel="noopener">
-              <div class="case-top"><span class="tag">Landing page</span><span>SUPLOG ↗</span></div>
-              <div class="mock"><div class="mock-inner"><div></div><div></div><div></div><div></div><div></div></div></div>
-              <div><h3>Presença digital com foco comercial.</h3><p>Estrutura de serviços, confiança e contato direto com o comercial em uma experiência objetiva e responsiva.</p></div>
-            </a>
-            <a class="case reveal" href="https://pmenezesdev.github.io/cumbuca-soparia/" target="_blank" rel="noopener"><div class="case-top"><span class="tag">Cardápio digital</span><span>CUMBUCA ↗</span></div><div><h3>Comprar ficou simples.</h3><p>Catálogo digital com experiência de pedido pensada para celular.</p></div></a>
-            <article class="case reveal"><div class="case-top"><span class="tag">Sistema interno</span><span>DOJOCONTROL</span></div><div><h3>Gestão sem planilha.</h3><p>Controle de alunos, turmas, mensalidades e rotina operacional em um só lugar.</p></div></article>
+          <div class="section-head reveal"><div><div class="kicker">Projetos em destaque</div><h2>Projetos reais para <span class="green">resultados reais.</span></h2></div><p>Exemplos visuais de trabalhos já desenvolvidos. Assim o cliente consegue avaliar acabamento, variedade e qualidade antes de pedir um orçamento.</p></div>
+          <div class="project-grid">
+            {projects.map((project) => (
+              project.href ? (
+                <a class="project reveal" href={project.href} target="_blank" rel="noopener">
+                  <div class="project-shot"><img src={project.image} alt={`Prévia do projeto ${project.title}`} loading="lazy" /><span class="project-status">{project.status}</span></div>
+                  <div class="project-body"><div class="project-top"><div><small>{project.category}</small><h3>{project.title}</h3></div><span class="project-link">↗</span></div><p>{project.description}</p></div>
+                </a>
+              ) : (
+                <article class="project reveal">
+                  <div class="project-shot"><img src={project.image} alt={`Prévia do projeto ${project.title}`} loading="lazy" /><span class="project-status">{project.status}</span></div>
+                  <div class="project-body"><div class="project-top"><div><small>{project.category}</small><h3>{project.title}</h3></div><span class="project-link">◫</span></div><p>{project.description}</p></div>
+                </article>
+              )
+            ))}
           </div>
         </div>
       </section>
 
       <section id="processo">
         <div class="shell">
-          <div class="section-head reveal"><div><div class="kicker">Como trabalhamos</div><h2>Clareza do briefing à publicação.</h2></div><p>Um processo curto, transparente e orientado a resultado — sem deixar você no escuro durante o desenvolvimento.</p></div>
-          <div class="process-wrap reveal">
-            <div class="step"><div class="n">01</div><h3>Diagnóstico</h3><p>Entendemos objetivo, público, referências, conteúdo e o que precisa acontecer depois do clique.</p></div>
-            <div class="step"><div class="n">02</div><h3>Direção & escopo</h3><p>Definimos estrutura, entregáveis, prazo e investimento antes de começar.</p></div>
-            <div class="step"><div class="n">03</div><h3>Design & desenvolvimento</h3><p>Construímos a experiência, validamos a direção e implementamos com foco em desempenho.</p></div>
-            <div class="step"><div class="n">04</div><h3>Publicação & suporte</h3><p>Colocamos no ar, revisamos detalhes e acompanhamos a fase inicial depois da entrega.</p></div>
+          <div class="section-head reveal"><div><div class="kicker">Como trabalhamos</div><h2>Um processo simples <span class="green">e transparente.</span></h2></div><p>Do primeiro contato à entrega final, você acompanha o projeto e sabe o que está acontecendo em cada etapa.</p></div>
+          <div class="process reveal">
+            <article class="step"><span class="step-no">01</span><h3>Briefing</h3><p>Entendemos objetivo, público, referências e o que precisa acontecer depois do clique.</p></article>
+            <article class="step"><span class="step-no">02</span><h3>Planejamento</h3><p>Definimos estrutura, escopo, prazo, investimento e entregáveis.</p></article>
+            <article class="step"><span class="step-no">03</span><h3>Desenvolvimento</h3><p>Design e implementação com acompanhamento, validação e ajustes.</p></article>
+            <article class="step"><span class="step-no">04</span><h3>Entrega</h3><p>Publicação, revisão final e suporte inicial para o projeto entrar em operação.</p></article>
           </div>
         </div>
       </section>
 
       <section>
-        <div class="shell">
-          <div class="price-card reveal">
-            <div><div class="kicker" style="color:#16200e">Investimento inicial</div><h2>Comece profissional sem inflar o projeto.</h2><p>Para projetos web simples, trabalhamos normalmente na faixa de <strong>R$ 1.500 a R$ 2.000</strong>, com escopo fechado. Projetos maiores são orçados conforme necessidade.</p></div>
-            <div class="price-box"><small>PROJETOS WEB SIMPLES</small><strong>R$ 1.500–2.000</strong><p>Faixa de referência. O valor final depende de escopo, integrações, conteúdo e prazo.</p><a class="pill" href={whatsapp} target="_blank" rel="noopener">Pedir orçamento ↗</a></div>
+        <div class="shell"><div class="offer reveal"><div><div class="kicker" style="color:#1e2b16">Investimento</div><h2>Comece com um projeto profissional e objetivo.</h2><p>Para projetos web simples, a faixa inicial definida é de <strong>R$ 1.500 a R$ 2.000</strong>. Sistemas, integrações e projetos maiores são orçados conforme o escopo.</p></div><div class="price"><small>PROJETOS WEB SIMPLES</small><strong>R$ 1.500–2.000</strong><p>Faixa de referência. O valor final depende de escopo, integrações, conteúdo e prazo.</p><a class="pill" href={whatsapp} target="_blank" rel="noopener">Pedir orçamento ↗</a></div></div></div>
+      </section>
+
+      <section id="faq">
+        <div class="shell faq">
+          <div class="faq-intro reveal"><div class="kicker">Dúvidas frequentes</div><h2>Antes de começar.</h2><p>Algumas respostas rápidas para facilitar a primeira conversa com quem está avaliando contratar a R.Kode.</p></div>
+          <div class="reveal">
+            <details open><summary>Quanto tempo leva para criar um site?</summary><p>Projetos simples costumam ser desenvolvidos em poucas semanas. O prazo exato é definido depois do briefing, conforme quantidade de páginas, conteúdo e integrações.</p></details>
+            <details><summary>O site funciona bem no celular?</summary><p>Sim. Todos os projetos são construídos com layout responsivo, priorizando boa experiência em celular, tablet e desktop.</p></details>
+            <details><summary>A R.Kode também cuida da publicação?</summary><p>Sim. Podemos orientar domínio e hospedagem e entregar o projeto publicado e funcionando.</p></details>
+            <details><summary>Existe suporte depois da entrega?</summary><p>Sim. O projeto inclui acompanhamento inicial e também podemos manter uma rotina de manutenção e evolução contínua.</p></details>
           </div>
         </div>
       </section>
 
       <section>
-        <div class="shell"><div class="cta reveal"><div class="kicker" style="color:#5c6556">Próximo projeto</div><h2>Tem uma ideia? A gente transforma em algo que funciona.</h2><p>Conte o que você quer colocar no ar. A primeira conversa serve para entender o cenário e indicar o caminho mais simples para começar.</p><div class="actions"><a class="pill" href={whatsapp} target="_blank" rel="noopener">Conversar no WhatsApp ↗</a></div></div></div>
+        <div class="shell"><div class="cta reveal"><div class="kicker">Vamos conversar</div><h2>Transforme sua ideia em um <span class="green">grande projeto.</span></h2><p>Conte o que você precisa. A primeira conversa serve para entender o cenário e indicar a forma mais simples e eficiente de começar.</p><div class="actions"><a class="pill" href={whatsapp} target="_blank" rel="noopener">Falar no WhatsApp ↗</a><a class="pill ghost" href="#projetos">Rever projetos</a></div></div></div>
       </section>
     </main>
 
-    <footer><div class="shell footer-row"><div>© 2026 R.Kode. Estratégia, design e desenvolvimento.</div><div>Sites · Sistemas · Automações · Suporte</div></div></footer>
+    <footer><div class="shell footer-row"><img class="footer-logo" src="/rcode/brand/rkode-logo-transparent.png" alt="R.Kode" /><div>© 2026 R.Kode. Estratégia, design e desenvolvimento.</div><div>Sites · Sistemas · Automações · Suporte</div></div></footer>
 
     <script is:inline>
-      const io = new IntersectionObserver((entries)=>entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('on');io.unobserve(entry.target)}}),{threshold:.12});
+      const io = new IntersectionObserver((entries)=>entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('on');io.unobserve(entry.target)}}),{threshold:.10});
       document.querySelectorAll('.reveal').forEach((el)=>io.observe(el));
     </script>
   </body>
